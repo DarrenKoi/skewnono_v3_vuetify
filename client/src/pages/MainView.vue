@@ -1,168 +1,106 @@
-<script setup>
-import ViewHeader from '@/layouts/ViewHeader.vue'
-import ViewFooter from '@/layouts/ViewFooter.vue'
-
-const features = [
-  {
-    icon: 'mdi-speedometer',
-    title: 'Fast Performance',
-    description: 'Lightning-fast load times and optimal performance across all devices'
-  },
-  {
-    icon: 'mdi-shield-check',
-    title: 'Secure & Reliable',
-    description: 'Built with security best practices and reliable infrastructure'
-  },
-  {
-    icon: 'mdi-palette',
-    title: 'Beautiful Design',
-    description: 'Modern, responsive design that looks great on any screen size'
-  }
-]
-
-const stats = [
-  { number: '500+', label: 'Projects Completed' },
-  { number: '100+', label: 'Happy Clients' },
-  { number: '24/7', label: 'Support Available' },
-  { number: '99.9%', label: 'Uptime Guarantee' }
-]
-</script>
-
 <template>
-  <v-app>
-    <ViewHeader />
-    
-    <v-main>
-      <!-- Hero Section -->
-      <v-container fluid class="pa-0">
-        <v-parallax
-          src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-          height="500"
+  <v-container class="pa-6">
+    <!-- Welcome Section -->
+    <v-card class="mb-6" elevation="2">
+      <v-card-title class="text-h4 font-weight-bold text-center pa-6">
+        <v-icon class="mr-3" color="primary" size="32">mdi-rocket-launch</v-icon>
+        SKEWNONO 대시보드
+      </v-card-title>
+      <v-card-subtitle class="text-center pb-4">
+        {{ selectionStore.selectedFab }} Fab, {{ selectionStore.selectedTool }} Tool 환경
+      </v-card-subtitle>
+    </v-card>
+
+    <!-- Status Cards -->
+    <v-row>
+      <v-col cols="12" md="4">
+        <v-card class="text-center pa-6" color="blue-lighten-5" elevation="2">
+          <v-icon color="blue" size="48">mdi-chart-line</v-icon>
+          <v-card-title class="text-h6">실시간 모니터링</v-card-title>
+          <v-card-text>시스템 상태를 실시간으로 확인합니다</v-card-text>
+          <v-btn color="blue" variant="outlined">상세보기</v-btn>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" md="4">
+        <v-card class="text-center pa-6" color="green-lighten-5" elevation="2">
+          <v-icon color="green" size="48">mdi-cog</v-icon>
+          <v-card-title class="text-h6">설정 관리</v-card-title>
+          <v-card-text>시스템 설정을 관리합니다</v-card-text>
+          <v-btn color="green" variant="outlined">설정하기</v-btn>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" md="4">
+        <v-card class="text-center pa-6" color="orange-lighten-5" elevation="2">
+          <v-icon color="orange" size="48">mdi-file-chart</v-icon>
+          <v-card-title class="text-h6">리포트 생성</v-card-title>
+          <v-card-text>분석 리포트를 생성합니다</v-card-text>
+          <v-btn color="orange" variant="outlined">생성하기</v-btn>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <!-- Current Selection Info -->
+    <v-card class="mt-6" elevation="2">
+      <v-card-title class="text-h6 font-weight-bold">
+        <v-icon class="mr-2" color="primary">mdi-information</v-icon>
+        현재 선택 정보
+      </v-card-title>
+      <v-card-text>
+        <v-row>
+          <v-col cols="6">
+            <v-chip color="primary" size="large" variant="outlined">
+              <v-icon start>mdi-factory</v-icon>
+              {{ selectionStore.selectedFab || '미선택' }}
+            </v-chip>
+          </v-col>
+          <v-col cols="6">
+            <v-chip color="primary" size="large" variant="outlined">
+              <v-icon start>mdi-tools</v-icon>
+              {{ selectionStore.selectedTool || '미선택' }}
+            </v-chip>
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn
+          color="grey"
+          variant="outlined"
+          @click="goBackToLanding"
         >
-          <v-container>
-            <v-row align="center" justify="center" class="fill-height">
-              <v-col cols="12" md="8" class="text-center">
-                <h1 class="text-h2 font-weight-bold mb-4">
-                  Welcome to Skewnono
-                </h1>
-                <p class="text-h5 mb-6">
-                  Building amazing digital experiences with modern technology
-                </p>
-                <v-btn
-                  color="primary"
-                  size="x-large"
-                  class="mr-4"
-                  to="/services"
-                >
-                  Get Started
-                </v-btn>
-                <v-btn
-                  variant="outlined"
-                  size="x-large"
-                  color="white"
-                  to="/about"
-                >
-                  Learn More
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-parallax>
-      </v-container>
-
-      <!-- Features Section -->
-      <v-container class="py-12">
-        <v-row>
-          <v-col cols="12" class="text-center mb-8">
-            <h2 class="text-h3 font-weight-bold mb-4">Why Choose Us</h2>
-            <p class="text-h6 text-grey">
-              We deliver exceptional results with cutting-edge technology
-            </p>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col
-            v-for="feature in features"
-            :key="feature.title"
-            cols="12"
-            md="4"
-          >
-            <v-card
-              class="pa-6 text-center"
-              elevation="0"
-              variant="tonal"
-            >
-              <v-icon
-                :icon="feature.icon"
-                size="64"
-                color="primary"
-                class="mb-4"
-              />
-              <h3 class="text-h5 font-weight-bold mb-2">
-                {{ feature.title }}
-              </h3>
-              <p class="text-body-1 text-grey">
-                {{ feature.description }}
-              </p>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-
-      <!-- Stats Section -->
-      <v-container fluid class="bg-primary py-12">
-        <v-container>
-          <v-row>
-            <v-col
-              v-for="stat in stats"
-              :key="stat.label"
-              cols="6"
-              md="3"
-              class="text-center"
-            >
-              <div class="text-h3 font-weight-bold white--text">
-                {{ stat.number }}
-              </div>
-              <div class="text-body-1 white--text">
-                {{ stat.label }}
-              </div>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-container>
-
-      <!-- CTA Section -->
-      <v-container class="py-12">
-        <v-row justify="center">
-          <v-col cols="12" md="8" class="text-center">
-            <h2 class="text-h3 font-weight-bold mb-4">
-              Ready to Get Started?
-            </h2>
-            <p class="text-h6 mb-6 text-grey">
-              Let's work together to bring your ideas to life
-            </p>
-            <v-btn
-              color="primary"
-              size="x-large"
-              to="/contact"
-            >
-              Contact Us Today
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-
-    <ViewFooter />
-  </v-app>
+          <v-icon start>mdi-arrow-left</v-icon>
+          선택 화면으로
+        </v-btn>
+        <v-btn
+          color="error"
+          variant="outlined"
+          @click="selectionStore.clearSelection"
+        >
+          <v-icon start>mdi-refresh</v-icon>
+          초기화
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-container>
 </template>
 
-<style scoped>
-.bg-primary {
-  background-color: rgb(var(--v-theme-primary));
-}
+<script setup>
+  import { useRouter } from 'vue-router'
+  import { useSelectionStore } from '@/stores/selection'
 
-.white--text {
-  color: white !important;
+  const selectionStore = useSelectionStore()
+  const router = useRouter()
+
+  function goBackToLanding () {
+    router.push('/landing')
+  }
+</script>
+
+<style scoped>
+.v-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
 }
 </style>

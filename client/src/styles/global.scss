@@ -1,0 +1,39 @@
+/**
+ * Global styles for Korean Engineering application
+ */
+
+// Set Noto Sans KR as the default font
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+// Override Vuetify's default font
+.v-application {
+  font-family: 'Noto Sans KR', sans-serif !important;
+
+  // All text elements should use Noto Sans KR
+  [class*="text-"] {
+    font-family: 'Noto Sans KR', sans-serif !important;
+  }
+}
+
+// Ensure all headings use Noto Sans KR
+h1, h2, h3, h4, h5, h6,
+.text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6 {
+  font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+// Better Korean text rendering
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  word-break: keep-all; // Prevents Korean words from breaking
+  line-break: strict; // Better line breaking for Korean
+}
+
+// Improved readability for Korean text
+p, .text-body-1, .text-body-2 {
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}

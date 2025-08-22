@@ -6,12 +6,18 @@
 
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
+import LandingPage from '@/pages/LandingPage.vue'
 import MainView from '@/pages/MainView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'landing-page',
+    component: LandingPage,
+  },
+  {
+    path: '/main',
+    name: 'main-view',
     component: MainView,
   },
 ]

@@ -9,6 +9,9 @@ import { createApp } from 'vue'
 // Plugins
 import { registerPlugins } from '@/plugins'
 
+// Global styles
+import '@/styles/global.scss'
+
 import App from './App.vue'
 
 const app = createApp(App)
